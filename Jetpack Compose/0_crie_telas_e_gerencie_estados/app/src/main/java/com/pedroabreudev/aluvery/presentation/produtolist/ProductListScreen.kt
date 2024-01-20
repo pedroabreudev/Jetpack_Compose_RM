@@ -1,11 +1,9 @@
 package com.pedroabreudev.aluvery.presentation.produtolist
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,22 +18,21 @@ import com.pedroabreudev.aluvery.ui.theme.AluveryTheme
 fun ProductListScreen(
     sections: Map<String, List<Product>>
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(vertical = 16.dp)
     ) {
-        Spacer(modifier = Modifier)
         for (section in sections) {
             val title = section.key
             val products = section.value
-            ProductsSection(
-                title = title,
-                products = products
-            )
+            item {
+                ProductsSection(
+                    title = title,
+                    products = products
+                )
+            }
         }
-        Spacer(modifier = Modifier)
     }
 }
 
