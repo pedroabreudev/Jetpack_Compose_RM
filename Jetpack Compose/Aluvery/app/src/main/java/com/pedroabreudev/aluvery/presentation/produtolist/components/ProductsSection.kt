@@ -20,9 +20,10 @@ import com.pedroabreudev.aluvery.domain.sampledata.sampleProducts
 @Composable
 fun ProductsSection(
     title: String,
-    products: List<Product>
+    products: List<Product>,
+    modifier: Modifier = Modifier,
 ) {
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(modifier = modifier) {
         Text(
             modifier = Modifier.padding(
                 start = 16.dp, end = 16.dp
