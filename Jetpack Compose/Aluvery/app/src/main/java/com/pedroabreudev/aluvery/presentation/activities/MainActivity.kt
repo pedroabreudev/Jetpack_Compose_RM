@@ -16,10 +16,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.pedroabreudev.aluvery.data.database.dao.ProductDao
-import com.pedroabreudev.aluvery.domain.sampledata.sampleCandies
-import com.pedroabreudev.aluvery.domain.sampledata.sampleDrinks
 import com.pedroabreudev.aluvery.domain.sampledata.sampleSections
 import com.pedroabreudev.aluvery.presentation.produtolist.ProductListScreen
+import com.pedroabreudev.aluvery.presentation.produtolist.ProductListScreenUiState
 import com.pedroabreudev.aluvery.ui.theme.AluveryTheme
 
 class MainActivity : ComponentActivity() {
@@ -37,14 +36,10 @@ class MainActivity : ComponentActivity() {
                         )
                     )
                 }, content = {
-                    val sections = mapOf(
-                        "Todos os produtos" to dao.products(),
-                        "Promoções" to sampleDrinks + sampleCandies,
-                        "Doces" to sampleCandies,
-                        "Bebidas" to sampleDrinks,
-                    )
-                    ProductListScreen(sections = sections)
-                })
+                    val products = dao.products()
+                    ProductListScreen(products = products)
+                }
+            )
         }
     }
 }
@@ -75,6 +70,6 @@ fun App(
 private fun AppPreview() {
     App(
         content = {
-            ProductListScreen(sections = sampleSections)
+            ProductListScreen(ProductListScreenUiState(sections = sampleSections))
         })
 }
